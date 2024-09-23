@@ -1,0 +1,12 @@
+{% extends "layout.html" %}{% load static %} {% block title %} {{post.title}}
+{%endblock title%} {%block content %}
+<section>
+  <div class="box">
+    <img class="banner" src="{{post.banner.url}}" alt="{{post.title}}" />
+  </div>
+  <h1>{{post.title}}</h1>
+  <p>{{post.date}}</p>
+  <p>{{post.body}}</p>
+</section>
+
+{% endblock content %}
