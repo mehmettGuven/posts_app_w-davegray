@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 
 
 
@@ -22,7 +22,15 @@ def login_view(request):
         if form.is_valid():
             #LOGIN HERE
             login(request, form.get_user())
-            return redirect('posts:list')
+            if "next" in request.POST:
+                return redirect(request.POST.get('next'))
+            else:
+                return redirect('posts:list')
     else:
         form = AuthenticationForm()
     return render(request,'users/login.html', {"form":form})
+
+def logout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect('posts:list')
